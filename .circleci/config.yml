@@ -3,7 +3,7 @@ version: 2
 jobs:
   build-java-8:
     docker:
-      - image: circleci/openjdk:8-stretch
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - restore_cache:
@@ -18,7 +18,7 @@ jobs:
           path: target/surefire-reports
   build-java-11:
     docker:
-        - image: circleci/openjdk:11-stretch
+        - image: circleci/openjdk:11-jdk
     steps:
       - checkout
       - restore_cache:
