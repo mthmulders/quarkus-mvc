@@ -16,6 +16,7 @@ jobs:
       - run: mvn verify
       - store_test_results:
           path: target/surefire-reports
+
   build-java-11:
     docker:
         - image: circleci/openjdk:11-jdk
@@ -35,13 +36,13 @@ jobs:
 workflows:
   version: 2
   build:
-    triggers:
-      - schedule:
-          cron: "14 3 * * *"
-          filters:
-            branches:
-              only:
-                - master
+#    triggers:
+#      - schedule:
+#          cron: "14 3 * * *"
+#          filters:
+#            branches:
+#              only:
+#                - master
     jobs:
       - build-java-8
       - build-java-11
