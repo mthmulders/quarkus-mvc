@@ -19,11 +19,13 @@ import javax.inject.Inject;
 import javax.mvc.RedirectScoped;
 
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
-import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;
+import io.quarkus.arc.deployment.ContextRegistrarBuildItem;
+import io.quarkus.arc.processor.ContextRegistrar;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.substrate.SubstrateResourceBuildItem;
+import it.mulders.quarkusmvc.runtime.RedirectScopeContext;
 import org.eclipse.krazo.MvcContextImpl;
 import org.eclipse.krazo.KrazoConfig;
 import org.eclipse.krazo.binding.BeanValidationProducer;
@@ -59,11 +61,8 @@ import org.eclipse.krazo.security.EncodersImpl;
 import org.eclipse.krazo.uri.ApplicationUris;
 import org.eclipse.krazo.uri.UriTemplateParser;
 import org.eclipse.krazo.util.CdiUtils;
-import org.jboss.jandex.DotName;
 
 public class MvcProcessor {
-    private static DotName REDIRECT_SCOPE = DotName.createSimple(RedirectScoped.class.getName());
-
     @Inject
     BuildProducer<SubstrateResourceBuildItem> resource;
 
@@ -73,8 +72,12 @@ public class MvcProcessor {
     }
 
     @BuildStep
-    BeanDefiningAnnotationBuildItem registerRedirectScope() {
-        return new BeanDefiningAnnotationBuildItem(REDIRECT_SCOPE, REDIRECT_SCOPE);
+    ContextRegistrarBuildItem registerRedirectScope() {
+        return new ContextRegistrarBuildItem(new ContextRegistrar() {
+            public void register(RegistrationContext registrationContext) {
+                registrationContext.configure(RedirectScoped.class).normal().contextClass(RedirectScopeContext.class).done();
+            }
+        });
     }
 
     @BuildStep
@@ -150,6 +153,5 @@ public class MvcProcessor {
         ).build();
         additionalBeans.produce(buildItem);
     }
-
 
 }
