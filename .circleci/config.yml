@@ -12,7 +12,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: quarkus-mvc-{{ .Branch }}-{{ checksum "pom.xml" }}
+          key: quarkus-mvc-2-{{ .Branch }}-{{ checksum "pom.xml" }}
       - run: mvn verify
       - store_test_results:
           path: target/surefire-reports
@@ -28,7 +28,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: quarkus-mvc-{{ .Branch }}-{{ checksum "pom.xml" }}
+          key: quarkus-mvc-2-{{ .Branch }}-{{ checksum "pom.xml" }}
       - run: mvn verify
       - store_test_results:
           path: target/surefire-reports
