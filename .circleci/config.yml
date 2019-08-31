@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: quarkus-mvc-{{ .Branch }}-{{ checksum "pom.xml" }}
+          key: quarkus-mvc-2-{{ .Branch }}-{{ checksum "pom.xml" }}
       - run: mvn dependency:go-offline || true
       - save_cache:
           paths:
@@ -23,7 +23,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: quarkus-mvc-{{ .Branch }}-{{ checksum "pom.xml" }}
+          key: quarkus-mvc-2-{{ .Branch }}-{{ checksum "pom.xml" }}
       - run: mvn dependency:go-offline || true
       - save_cache:
           paths:
