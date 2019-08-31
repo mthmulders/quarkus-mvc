@@ -16,7 +16,7 @@
 package it.mulders.quarkusmvc;
 
 import javax.inject.Inject;
-import javax.mvc.RedirectScoped;
+import javax.mvc.annotation.RedirectScoped;
 
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;
@@ -24,7 +24,6 @@ import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.substrate.SubstrateResourceBuildItem;
-import it.mulders.quarkusmvc.runtime.ServletContextProducer;
 import org.eclipse.krazo.MvcContextImpl;
 import org.eclipse.krazo.KrazoConfig;
 import org.eclipse.krazo.binding.BeanValidationProducer;
@@ -83,14 +82,6 @@ public class MvcProcessor {
         resource.produce(new SubstrateResourceBuildItem(
                 "/META-INF/context.xml"
         ));
-    }
-
-    @BuildStep
-    public void servletContextBean(BuildProducer<AdditionalBeanBuildItem> additionalBeans) {
-        final AdditionalBeanBuildItem buildItem = AdditionalBeanBuildItem.builder()
-                .addBeanClass(ServletContextProducer.class)
-                .build();
-        additionalBeans.produce(buildItem);
     }
 
     @BuildStep
