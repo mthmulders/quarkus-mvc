@@ -17,7 +17,6 @@ package it.mulders.quarkusmvc.exampleapp;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 @RequestScoped
