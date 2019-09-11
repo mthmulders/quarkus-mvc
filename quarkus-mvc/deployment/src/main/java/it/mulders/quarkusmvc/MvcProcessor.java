@@ -16,7 +16,7 @@
 package it.mulders.quarkusmvc;
 
 import javax.inject.Inject;
-import javax.mvc.annotation.RedirectScoped;
+import javax.mvc.RedirectScoped;
 
 import io.quarkus.arc.deployment.AdditionalBeanBuildItem;
 import io.quarkus.arc.deployment.BeanDefiningAnnotationBuildItem;

@@ -29,7 +29,7 @@
         <dependency>
             <groupId>javax.mvc</groupId>
             <artifactId>javax.mvc-api</artifactId>
-            <version>1.0-pr</version>
+            <version>1.0-pfd</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.krazo</groupId>
