@@ -8,12 +8,16 @@ jobs:
       - checkout
       - restore_cache:
           key: quarkus-mvc-2-{{ .Branch }}-{{ checksum "pom.xml" }}
-      - run: mvn dependency:go-offline || true
+      - run:
+          name: Prepare build
+          command: mvn dependency:go-offline || true
       - save_cache:
           paths:
             - ~/.m2
           key: quarkus-mvc-2-{{ .Branch }}-{{ checksum "pom.xml" }}
-      - run: mvn verify
+      - run:
+          name: Run tests
+          command: mvn verify
       - store_test_results:
           path: target/surefire-reports
 
@@ -24,14 +28,34 @@ jobs:
       - checkout
       - restore_cache:
           key: quarkus-mvc-2-{{ .Branch }}-{{ checksum "pom.xml" }}
-      - run: mvn dependency:go-offline || true
+     - run:
+         name: Prepare build
+         command: mvn dependency:go-offline || true
       - save_cache:
           paths:
             - ~/.m2
           key: quarkus-mvc-2-{{ .Branch }}-{{ checksum "pom.xml" }}
-      - run: mvn verify
+      - run:
+          name: Run tests
+          command: mvn verify
       - store_test_results:
           path: target/surefire-reports
+
+  quality-analysis:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout
+      - restore_cache:
+          key: quarkus-mvc-2-{{ .Branch }}-{{ checksum "pom.xml" }}
+      - run:
+          name: Run SonarCloud analysis
+          command: |
+            mvn -e org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar \
+              -Dsonar.projectKey=mthmulders_quarkus-mvc \
+              -Dsonar.organization=mthmulders-github \
+              -Dsonar.host.url=https://sonarcloud.io \
+              -Dsonar.login=$SONAR_LOGIN
 
 workflows:
   version: 2
@@ -50,3 +74,4 @@ workflows:
     jobs:
       - build-java-8
       - build-java-11
+      - quality-analysis
