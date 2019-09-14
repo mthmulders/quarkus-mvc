@@ -1,6 +1,7 @@
 # Quarkus MVC Extension
 
 [![CircleCI](https://circleci.com/gh/mthmulders/quarkus-mvc.svg?style=svg)](https://circleci.com/gh/mthmulders/quarkus-mvc)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mthmulders_quarkus-mvc&metric=alert_status)](https://sonarcloud.io/dashboard?id=mthmulders_quarkus-mvc)
 
 This is an experiment to see if [JSR-371 (Model-View-Controller)](https://www.mvc-spec.org/) could work in Quarkus.
 
