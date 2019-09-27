@@ -89,7 +89,7 @@ public class MvcProcessor {
 
     @BuildStep
     public void krazoBeans(BuildProducer<AdditionalBeanBuildItem> additionalBeans) {
-        final AdditionalBeanBuildItem buildItem = AdditionalBeanBuildItem.builder().addBeanClasses(
+        final AdditionalBeanBuildItem buildItem = AdditionalBeanBuildItem.builder().setUnremovable().addBeanClasses(
                 // Copied over from org.eclipse.krazo.cdi.KrazoCdiExtension
 
                 // .
