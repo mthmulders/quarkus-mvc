@@ -11,6 +11,8 @@ It comes with an example application that shows how to use this Quarkus extensio
 > First of all, this is **an experiment**.
 > It doesn't work at all - yet.
 
-First hurdle to take is the fact the Reference Implementation of JSR-371, [Krazo](https://github.com/eclipse-ee4j/krazo), uses a circular dependency.
+Below is a log of issues that currently prevent (or have prevented) JSR-371 from running on top of Quarkus.
+
+* [X] **🎉 Fixed in v0.23.1 of Quarkus** The Reference Implementation of JSR-371, [Krazo](https://github.com/eclipse-ee4j/krazo), uses a cyclic dependency.
 This is not yet supported in ArC, the CDI-implementation used by Quarkus.
 Because they've [shown interest](https://github.com/quarkusio/quarkus/issues/2990) in having support for that, I'm working on that first.
