@@ -22,7 +22,7 @@ import javax.mvc.View;
 import javax.mvc.Models;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.PathParam;
 
 @Controller
 @Path("/greeting/")
@@ -35,8 +35,9 @@ public class GreetingResource {
     Models models;
 
     @GET
+    @Path("/{name}")
     @View("hello.jsp")
-    public void hello(@QueryParam("name") final String name) {
+    public void hello(@PathParam("name") final String name) {
         models.put("name", name);
         models.put("remoteIp", userInfoService.getRemoteIp());
     }
