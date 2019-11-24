@@ -43,12 +43,6 @@
             <!-- This module is not in the Quarkus BOM so we need to pin the version here -->
             <version>4.3.0.Final</version>
         </dependency>
-
-        <!-- EL implementation -->
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.el</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
