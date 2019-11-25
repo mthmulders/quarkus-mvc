@@ -24,7 +24,7 @@ import io.quarkus.arc.processor.ContextRegistrar;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
-import io.quarkus.deployment.builditem.substrate.SubstrateResourceBuildItem;
+import io.quarkus.deployment.builditem.nativeimage.NativeImageResourceBuildItem;
 import it.mulders.quarkusmvc.runtime.RedirectScopeContext;
 import org.eclipse.krazo.MvcContextImpl;
 import org.eclipse.krazo.KrazoConfig;
@@ -64,7 +64,7 @@ import org.eclipse.krazo.util.CdiUtils;
 
 public class MvcProcessor {
     @Inject
-    BuildProducer<SubstrateResourceBuildItem> resource;
+    BuildProducer<NativeImageResourceBuildItem> resource;
 
     @BuildStep(providesCapabilities = "it.mulders.quarkus-mvc")
     public FeatureBuildItem featureBuildItem() {
@@ -81,8 +81,8 @@ public class MvcProcessor {
     }
 
     @BuildStep
-    void registerNativeImageReources() {
-        resource.produce(new SubstrateResourceBuildItem(
+    void registerNativeImageResources() {
+        resource.produce(new NativeImageResourceBuildItem(
                 "/META-INF/context.xml"
         ));
     }
