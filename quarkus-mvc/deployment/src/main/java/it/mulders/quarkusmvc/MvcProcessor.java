@@ -23,6 +23,7 @@ import io.quarkus.arc.deployment.ContextRegistrarBuildItem;
 import io.quarkus.arc.processor.ContextRegistrar;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
+import io.quarkus.deployment.builditem.CapabilityBuildItem;
 import io.quarkus.deployment.builditem.FeatureBuildItem;
 import io.quarkus.deployment.builditem.nativeimage.NativeImageResourceBuildItem;
 import it.mulders.quarkusmvc.runtime.RedirectScopeContext;
@@ -66,9 +67,14 @@ public class MvcProcessor {
     @Inject
     BuildProducer<NativeImageResourceBuildItem> resource;
 
-    @BuildStep(providesCapabilities = "it.mulders.quarkus-mvc")
+    @BuildStep
     public FeatureBuildItem featureBuildItem() {
         return new FeatureBuildItem("quarkus-mvc");
+    }
+
+    @BuildStep
+    public CapabilityBuildItem capability() {
+        return new CapabilityBuildItem("it.mulders.quarkus-mvc");
     }
 
     @BuildStep
@@ -77,7 +83,7 @@ public class MvcProcessor {
             public void register(RegistrationContext registrationContext) {
                 registrationContext.configure(RedirectScoped.class).normal().contextClass(RedirectScopeContext.class).done();
             }
-        });
+        }, RedirectScoped.class);
     }
 
     @BuildStep
