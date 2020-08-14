@@ -43,7 +43,7 @@ jobs:
 
   quality-analysis:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:11-jdk
     steps:
       - checkout
       - restore_cache:
