@@ -41,7 +41,7 @@
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-validator-provider</artifactId>
             <!-- This module is not in the Quarkus BOM so we need to pin the version here -->
-            <version>4.4.1.Final</version>
+            <version>4.7.1.Final</version>
         </dependency>
 
         <!-- EL implementation -->
